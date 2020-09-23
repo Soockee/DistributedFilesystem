@@ -32,10 +32,10 @@ To configure your aws cli insert two profiles and a credential entry to aws conf
 
 create 2 new roles in ~/.aws/config 
 ```
-[profile igd]
+[profile xyz]
 
 [profile produser]
-role_arn = arn:aws:iam::<Your Role ID>:role/oe240/FraunhoferUserRole
+role_arn = <role>
 source_profile = default
 region = us-west-2
 output = json
@@ -44,7 +44,7 @@ output = json
 create 1 credential entry in ~/.aws/credentials
 
 ```
-[igd]
+[xyz]
 aws_access_key_id =  <insert secret access key id>
 aws_secret_access_key =  <insert secret access key>
 ```
