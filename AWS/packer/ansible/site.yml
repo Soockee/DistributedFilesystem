@@ -1,0 +1,13 @@
+---
+- name: Install Common Applications
+  hosts: all
+
+  roles:
+    - git
+    #- python-pip
+    - python-docker
+    - docker
+    - gcc
+    - cmake
+    - LASzip
+    - beeGFS

@@ -1,0 +1,4 @@
+---
+- name: install BeeGFS metadata Package
+  apt:
+    name: beegfs-storage

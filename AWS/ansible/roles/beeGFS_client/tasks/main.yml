@@ -1,0 +1,6 @@
+---
+- name: install BeeGFS metadata Package
+  apt:
+    pkg:
+      - beegfs-client
+      - beegfs-helperd

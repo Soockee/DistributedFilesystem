@@ -1,0 +1,36 @@
+---
+- name: install build-essential
+  become: true
+  apt: 
+    name: build-essential
+    state: present
+    
+- name: install gcc 7.5
+  become: true
+  apt: 
+    name: gcc-7
+    state: present
+
+- name: install g++ 7.5
+  become: true
+  apt: 
+    name: g++-7
+    state: present
+      
+- name: make sure all gcc symbolic links are gone
+  become: true
+  command: update-alternatives --remove-all gcc
+  ignore_errors: True
+
+- name: make sure all g++ symbolic links are gone
+  become: true
+  command: update-alternatives --remove-all g++
+  ignore_errors: True
+
+- name: make gcc 7.5 the default gcc compiler
+  become: yes
+  command: update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-7 10
+
+- name: make g++ 7.5 the default g++ compiler
+  become: yes
+  command: update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-7 10

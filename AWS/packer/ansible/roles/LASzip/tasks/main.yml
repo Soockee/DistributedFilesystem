@@ -1,0 +1,24 @@
+--- 
+- name: clone LAStool repository 
+  become: yes
+  git: 
+    repo: 'https://github.com/m-schuetz/LAStools.git'
+    dest: /home/ubuntu/dev/lastools
+  register: clone_result
+
+- name: check LAStool build directory 
+  become: yes
+  file: 
+    path: /home/ubuntu/dev/lastools/LASzip/build
+    state: directory
+  when: clone_result is succeeded
+
+- name: cmake LASzip 
+  become: yes
+  command: cmake -DCMAKE_BUILD_TYPE=Release -S /home/ubuntu/dev/lastools/LASzip/ -B /home/ubuntu/dev/lastools/LASzip/build
+
+- name: make LASzip
+  become: yes
+  command: make
+  args: 
+    chdir: /home/ubuntu/dev/lastools/LASzip/build

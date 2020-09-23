@@ -1,0 +1,11 @@
+---
+- name: Download Python Pip Install Script
+  become: yes
+  command: curl "https://bootstrap.pypa.io/get-pip.py" -o "get-pip.py"
+
+- name: Install Python Pip Via Script
+  become: true
+  script: get-pip.py
+
+
+

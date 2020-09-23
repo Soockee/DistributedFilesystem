@@ -1,0 +1,17 @@
+---
+- name: add Beegfs gpg key
+  become: true
+  apt_key:
+    url: https://www.beegfs.io/release/beegfs_7.2/gpg/DEB-GPG-KEY-beegfs
+    state: present
+
+- name: add beegfs repository to sources list
+  become: true
+  apt_repository:
+    repo: deb [arch=amd64] https://www.beegfs.io/release/beegfs_7.2 buster non-free
+    state: present
+
+- name: update repositorys
+  become: true
+  apt:
+    update_cache: yes

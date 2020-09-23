@@ -1,0 +1,27 @@
+---
+- name: check cmake directory 
+  become: yes
+  file: 
+    path: /home/ubuntu/cmake
+    state: directory
+
+- name: download cmake binary
+  become: true
+  get_url: 
+        url: https://github.com/Kitware/CMake/releases/download/v3.18.1/cmake-3.18.1-Linux-x86_64.tar.gz
+        dest: /home/ubuntu/cmake/install.sh
+        mode: '755'
+
+- name: Install CMake
+  become: true
+  unarchive: copy=no src=/home/ubuntu/cmake/install.sh dest=/home/ubuntu/cmake/
+
+- name: make sure all cmake symbolic links are gone
+  become: true
+  command: update-alternatives --remove-all cmake
+  ignore_errors: True
+
+- name: make cmake link
+  become: yes
+  command: update-alternatives --install /usr/bin/cmake cmake /home/ubuntu/cmake/cmake-3.18.1-Linux-x86_64/bin/cmake 10
+  ignore_errors: True

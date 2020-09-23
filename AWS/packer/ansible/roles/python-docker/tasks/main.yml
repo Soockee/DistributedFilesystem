@@ -1,0 +1,6 @@
+---
+- name: Install Ansible Docker Module
+  become: true
+  pip:
+    name: docker
+

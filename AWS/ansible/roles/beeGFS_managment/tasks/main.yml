@@ -1,0 +1,4 @@
+---
+- name: install BeeGFS managment Package
+  apt:
+    name: beegfs-mgmtd

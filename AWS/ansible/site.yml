@@ -1,0 +1,41 @@
+---
+# - name: Build Pointcloud-Tiler
+#   hosts: client
+
+#   roles:
+#     - setuptools
+#     - pexpect
+
+#   vars_prompt:
+#       - name: "gitlab_username"
+#         prompt: "Enter Gitlab Username"
+#         private: yes
+#         confirm: yes
+#       - name: "gitlab_password"
+#         prompt: "Enter Gitlab Password"
+#         private: yes
+#         confirm: yes
+
+- name: configure and deploy the beeGFS managment server
+  hosts: beeGFS_managment
+
+  roles:
+    - beeGFS_managment
+
+- name: configure and deploy the beeGFS metadata server
+  hosts: beeGFS_metadata
+
+  roles:
+    - beeGFS_metadata
+
+- name: configure and deploy the beeGFS storage server
+  hosts: beeGFS_storage
+
+  roles:
+    - beeGFS_storage
+
+- name: configure and deploy the beeGFS client server
+  hosts: beeGFS_client
+
+  roles:
+    - beeGFS_client

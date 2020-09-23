@@ -1,0 +1,49 @@
+{
+    "variables": {
+      "aws_profile": "{{ env `AWS_PROFIL` }}"
+    },
+    "builders": [{
+      "type": "amazon-ebs",
+      "access_key": "",
+      "secret_key": "",
+      "profile": "{{user `aws_profile`}}",
+      "region": "us-west-2",
+      "source_ami_filter": {
+        "filters": {
+          "virtualization-type": "hvm",
+          "name": "ubuntu/images/*ubuntu-focal-20.04-amd64-server-*",
+          "root-device-type": "ebs"
+        },
+        "owners": ["099720109477"],
+        "most_recent": true
+      },
+      "instance_type": "t2.micro",
+      "ssh_username": "ubuntu",
+      "ami_name": "beeGFS-pointcloud {{timestamp}}"
+    }],
+    "provisioners": [
+      {
+        "type": "shell",
+        "script" : "scripts/ansible.sh"
+      },
+      {
+        "type": "ansible-local",
+        "playbook_file": "ansible/site.yml",
+        "role_paths": [
+          "ansible/roles/git",
+          "ansible/roles/docker",
+          "ansible/roles/python-pip",
+          "ansible/roles/python-docker",
+          "ansible/roles/gcc",
+          "ansible/roles/cmake",
+          "ansible/roles/LASzip",
+          "ansible/roles/beeGFS"
+        ],
+        "group_vars": "ansible/group_vars"
+      },
+      {
+        "type": "shell",
+        "script" : "scripts/cleanup.sh"
+      }
+    ]
+}
