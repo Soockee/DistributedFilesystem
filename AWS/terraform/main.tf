@@ -35,7 +35,7 @@ resource "aws_instance" "beeGFS-management" {
   instance_type = "${var.beeGFS_managment_instance_type}"
   key_name = "${var.keypair}"
   tags = {
-    Name = "BeeGFS management"
+    Name = "BeeGFS Management"
   } 
   root_block_device {
     volume_type = "standard"
