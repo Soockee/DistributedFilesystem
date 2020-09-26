@@ -28,8 +28,24 @@ Host beeGFS_storage
   ForwardAgent yes
   ForwardX11 yes
 
-Host beeGFS_client
-  HostName ${ beeGFS_client }
+Host beeGFS_client_1
+  HostName ${ beeGFS_client_1 }
+  ControlMaster auto
+  ControlPath ~/.ssh/ansible-%r@%h:%p
+  ControlPersist 5m
+  ForwardAgent yes
+  ForwardX11 yes
+
+Host beeGFS_client_2
+  HostName ${ beeGFS_client_2 }
+  ControlMaster auto
+  ControlPath ~/.ssh/ansible-%r@%h:%p
+  ControlPersist 5m
+  ForwardAgent yes
+  ForwardX11 yes
+
+Host beeGFS_client_3
+  HostName ${ beeGFS_client_3 }
   ControlMaster auto
   ControlPath ~/.ssh/ansible-%r@%h:%p
   ControlPersist 5m

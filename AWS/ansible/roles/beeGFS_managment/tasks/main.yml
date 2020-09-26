@@ -1,4 +1,19 @@
 ---
-- name: install BeeGFS managment Package
+- name: install BeeGFS management Package
   apt:
+    name: beegfs-mgmtd
+
+
+- name: use template for management configuration file
+  template:
+    src: beegfs-mgmtd.j2
+    dest: /etc/beegfs/beegfs-mgmtd.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Make sure beegfs-mgmtd is running
+  systemd:
+    state: started
     name: beegfs-mgmtd

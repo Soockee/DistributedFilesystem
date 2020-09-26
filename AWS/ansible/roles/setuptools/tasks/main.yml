@@ -1,5 +1,8 @@
+- name: Update repositories cache
+  become: true
+  apt:
+    update_cache: yes
 - name: install setuptools
-  
   apt:
     name: python-setuptools
     state: present

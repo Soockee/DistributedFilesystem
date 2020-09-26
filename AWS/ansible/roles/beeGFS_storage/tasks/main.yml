@@ -2,3 +2,17 @@
 - name: install BeeGFS metadata Package
   apt:
     name: beegfs-storage
+
+- name: use template for storage configuration file
+  template:
+    src: beegfs-storage.j2
+    dest: /etc/beegfs/beegfs-storage.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Make sure beegfs-storage is running
+  systemd:
+    state: started
+    name: beegfs-storage

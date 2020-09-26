@@ -2,3 +2,17 @@
 - name: install BeeGFS metadata Package
   apt:
     name: beegfs-meta
+
+- name: use template for meta configuration file
+  template:
+    src: beegfs-meta.j2
+    dest: /etc/beegfs/beegfs-meta.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Make sure beegfs-meta is running
+  systemd:
+    state: started
+    name: beegfs-meta

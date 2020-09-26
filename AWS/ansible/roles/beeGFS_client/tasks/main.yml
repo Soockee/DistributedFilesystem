@@ -1,6 +1,35 @@
 ---
-- name: install BeeGFS metadata Package
+- name: install BeeGFS client Package
   apt:
     pkg:
       - beegfs-client
       - beegfs-helperd
+      - beegfs-utils
+
+- name: use template for client configuration file
+  template:
+    src: beegfs-client.j2
+    dest: /etc/beegfs/beegfs-client.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: use template for mount configuration file
+  template:
+    src: beegfs-mounts.j2
+    dest: /etc/beegfs/beegfs-mounts.conf
+    owner: root
+    group: root
+    mode: '0644'
+    backup: yes
+
+- name: Make sure beegfs-helperd is running
+  systemd:  
+    state: started
+    name: beegfs-helperd
+
+- name: Make sure beegfs-client is running
+  systemd:  
+    state: started
+    name: beegfs-client

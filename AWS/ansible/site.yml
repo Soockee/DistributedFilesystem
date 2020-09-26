@@ -1,10 +1,10 @@
 ---
-# - name: Build Pointcloud-Tiler
-#   hosts: client
+- name: Python Tools
+  hosts: all
 
-#   roles:
-#     - setuptools
-#     - pexpect
+  roles:
+    - setuptools
+    - pexpect
 
 #   vars_prompt:
 #       - name: "gitlab_username"
@@ -16,7 +16,7 @@
 #         private: yes
 #         confirm: yes
 
-- name: configure and deploy the beeGFS managment server
+- name: configure and deploy the beeGFS management server
   hosts: beeGFS_managment
 
   roles:

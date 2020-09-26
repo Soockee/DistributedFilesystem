@@ -10,10 +10,12 @@ data  "template_file" "aws" {
     template = "${file("./templates/hosts.tpl")}"
     vars = {
         ansible_ssh_private_key_file= "${var.ssh_private_key_file_path}"
-        beeGFS_managment = aws_instance.beeGFS-managment.public_dns
+        beeGFS_managment = aws_instance.beeGFS-management.public_dns
         beeGFS_metadata = aws_instance.beeGFS-metadata.public_dns
         beeGFS_storage = aws_instance.beeGFS-storage.public_dns
-        beeGFS_client = aws_instance.beeGFS-client.public_dns
+        beeGFS_client_1 = aws_instance.beeGFS-client-1.public_dns
+        beeGFS_client_2 = aws_instance.beeGFS-client-2.public_dns
+        beeGFS_client_3 = aws_instance.beeGFS-client-3.public_dns
 
     }
 }

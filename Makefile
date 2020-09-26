@@ -41,7 +41,7 @@ provisioning-verbose:
 	ansible-playbook -vvvv -i ../terraform/ansible-provisioning/aws-hosts site.yml && \
 	cd ..
 
-AWS-connect-managment:
+AWS-connect-management:
 	$(sshAWS) beeGFS_managment
 
 AWS-connect-metadata:
@@ -49,6 +49,11 @@ AWS-connect-metadata:
 
 AWS-connect-storage:
 	$(sshAWS) beeGFS_storage	
+
+AWS-connect-client:
+	$(sshAWS) beeGFS_client	
+AWS-connect-client-with-clientID:
+	$(sshAWS) beeGFS_client_$(clientID)
 
 AWS-move-ssh-config-to-ssh-directory:
 	cd AWS/terraform && \

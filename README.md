@@ -77,11 +77,6 @@ To use the generated ssh-config file you have to either
 1) use the connect make command 
 2) move the config file to the specific location ```~/.ssh/config```
 
-Connect to the Pointcloud-Tiler Instance:
-
-```
-make AWS-connect
-```
 
 or use the following command to move the file and **overwrite** the old ssh-config:
 
