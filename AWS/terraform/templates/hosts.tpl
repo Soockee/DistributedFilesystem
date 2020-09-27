@@ -1,10 +1,17 @@
 [all]
 ${ beeGFS_managment }
-${ beeGFS_metadata }
+
+%{for beeGFS_metadata_addr in beeGFS_metadatas ~}
+${ beeGFS_metadata_addr }
+%{ endfor ~}
+
+%{for beeGFS_storage in beeGFS_storages ~}
 ${ beeGFS_storage }
-${ beeGFS_client_1 }
-${ beeGFS_client_2 }
-${ beeGFS_client_2 }
+%{ endfor ~}
+
+%{for beeGFS_client in beeGFS_clients ~}
+${ beeGFS_client }
+%{ endfor ~}
 
 [all:vars]
 ansible_user=ubuntu
@@ -18,12 +25,16 @@ beeGFS_managment_ipv4=${ beeGFS_managment }
 ${ beeGFS_managment }
 
 [beeGFS_metadata]
-${ beeGFS_metadata }
+%{for beeGFS_metadata_addr in beeGFS_metadatas ~}
+${ beeGFS_metadata_addr }
+%{ endfor ~}
 
 [beeGFS_storage]
+%{for beeGFS_storage in beeGFS_storages ~}
 ${ beeGFS_storage }
+%{ endfor ~}
 
 [beeGFS_client]
-${ beeGFS_client_1 }
-${ beeGFS_client_2 }
-${ beeGFS_client_3 }
+%{for beeGFS_client in beeGFS_clients ~}
+${ beeGFS_client }
+%{ endfor ~}

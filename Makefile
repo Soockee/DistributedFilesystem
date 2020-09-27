@@ -44,16 +44,12 @@ provisioning-verbose:
 AWS-connect-management:
 	$(sshAWS) beeGFS_managment
 
-AWS-connect-metadata:
-	$(sshAWS) beeGFS_metadata
-
-AWS-connect-storage:
-	$(sshAWS) beeGFS_storage	
-
-AWS-connect-client:
-	$(sshAWS) beeGFS_client	
-AWS-connect-client-with-clientID:
-	$(sshAWS) beeGFS_client_$(clientID)
+AWS-connect-storage-with-id:
+	$(sshAWS) beeGFS_storage_$(id)
+AWS-connect-metadata-with-id:
+	$(sshAWS) beeGFS_metadata_$(id)
+AWS-connect-client-with-id:
+	$(sshAWS) beeGFS_client_$(id)
 
 AWS-move-ssh-config-to-ssh-directory:
 	cd AWS/terraform && \
