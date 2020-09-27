@@ -12,42 +12,32 @@ Host beeGFS_managment
   ForwardAgent yes
   ForwardX11 yes
 
-Host beeGFS_metadata
-  HostName ${ beeGFS_metadata }
+%{for index, beeGFS_metadata_addr in beeGFS_metadatas ~}
+Host beeGFS_metadata_${index}
+  HostName ${ beeGFS_metadata_addr }
   ControlMaster auto
   ControlPath ~/.ssh/ansible-%r@%h:%p
   ControlPersist 5m
   ForwardAgent yes
   ForwardX11 yes
+%{ endfor ~}
 
-Host beeGFS_storage
-  HostName ${ beeGFS_storage }
+%{for index, beeGFS_storage_addr in beeGFS_storages ~}
+Host beeGFS_storage_${index}
+  HostName ${ beeGFS_storage_addr }
   ControlMaster auto
   ControlPath ~/.ssh/ansible-%r@%h:%p
   ControlPersist 5m
   ForwardAgent yes
   ForwardX11 yes
+%{ endfor ~}
 
-Host beeGFS_client_1
-  HostName ${ beeGFS_client_1 }
+%{for index, beeGFS_client_addr in beeGFS_clients ~}
+Host beeGFS_client_${index}
+  HostName ${ beeGFS_client_addr }
   ControlMaster auto
   ControlPath ~/.ssh/ansible-%r@%h:%p
   ControlPersist 5m
   ForwardAgent yes
   ForwardX11 yes
-
-Host beeGFS_client_2
-  HostName ${ beeGFS_client_2 }
-  ControlMaster auto
-  ControlPath ~/.ssh/ansible-%r@%h:%p
-  ControlPersist 5m
-  ForwardAgent yes
-  ForwardX11 yes
-
-Host beeGFS_client_3
-  HostName ${ beeGFS_client_3 }
-  ControlMaster auto
-  ControlPath ~/.ssh/ansible-%r@%h:%p
-  ControlPersist 5m
-  ForwardAgent yes
-  ForwardX11 yes
+%{ endfor ~}
