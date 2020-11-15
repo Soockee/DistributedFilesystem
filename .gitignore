@@ -32,3 +32,6 @@ ssh_config
 
 *.tfstate
 *.tfstate.backup
+
+AWS/ansible/roles/pointcloud_tiler/
+workload_testing/

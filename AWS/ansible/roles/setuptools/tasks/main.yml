@@ -1,9 +1,20 @@
-- name: Update repositories cache
-  become: true
+# On AWS Instances occasionally failes to provision single instances
+# duo to lock descibed here:  https://github.com/ansible/ansible/issues/51663
+# sudo mv /var/lib/dpkg/lock /var/lib/dpkg/lock.bak
+# workaround:
+- name: Update APT Cache
   apt:
     update_cache: yes
+    force_apt_get: yes
+
+- name: Remove apt lock file
+  file:
+    state: absent
+    path: "/var/lib/dpkg/lock"
+
 - name: install setuptools
   become: true
   apt:
     name: python-setuptools
     state: present
+    force_apt_get: yes

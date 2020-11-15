@@ -26,32 +26,32 @@ variable "ssh_private_key_file_path" {}
 
 ## beeGFS Managment
 variable "beeGFS_managment_instance_type" {
-  default = "t2.micro"
+  default = "t2.small"
 }
 
 ## beeGFS Metadata
 variable "beeGFS_metadata_instance_type" {
-  default = "t2.micro"
+  default = "t2.medium"
 }
 variable "beeGFS_metadata_instance_count" {
   description = "Count of beeGFS Metadata Instances"
-  default = "5"
+  default = "2"
 }
 ## beeGFS Storage
 variable "beeGFS_storage_instance_type" {
-  default = "t2.micro"
+  default = "t2.xlarge"
 }
 variable "beeGFS_storage_instance_count" {
   description = "Count of beeGFS Storage Instances"
-  default = "30"
+  default = "2"
 }
 
 ## beeGFS Clients
 variable "beeGFS_client_instance_type" {
-  default = "t2.micro"
+  default = "t2.xlarge"
 }
 variable "beeGFS_client_instance_count" {
   description = "Count of beeGFS Client Instances"
-  default = "5"
+  default = "1"
 }
 

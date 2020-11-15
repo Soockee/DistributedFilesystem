@@ -64,7 +64,7 @@ module "beeGFS_metadata_cluster" {
   root_block_device = [ 
     {
       volume_type = "standard"
-      volume_size = 20
+      volume_size = 30
       delete_on_termination = true
     }
   ]
@@ -89,7 +89,7 @@ module "beeGFS_storage_cluster" {
   root_block_device = [ 
     {
       volume_type = "standard"
-      volume_size = 20
+      volume_size = 200
       delete_on_termination = true
     }
   ]
@@ -98,7 +98,7 @@ module "beeGFS_storage_cluster" {
   subnet_id = "${aws_subnet.beeGFS-public-subnet.id}"
 }
 
-# beeGFS-storage server
+# beeGFS-client server
 module "beeGFS_client_cluster"  {
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "~> 2.0"
