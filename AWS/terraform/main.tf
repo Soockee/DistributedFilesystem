@@ -38,7 +38,7 @@ resource "aws_instance" "beeGFS-management" {
     Name = "BeeGFS Management"
   } 
   root_block_device  {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_management_root_block_type}"
       volume_size = 20
       delete_on_termination = true
   }
@@ -63,7 +63,7 @@ module "beeGFS_metadata_cluster" {
   } 
   root_block_device = [ 
     {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_metadata_root_block_type}"
       volume_size = 30
       delete_on_termination = true
     }
@@ -88,7 +88,7 @@ module "beeGFS_storage_cluster" {
   } 
   root_block_device = [ 
     {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
       volume_size = 200
       delete_on_termination = true
     }
@@ -113,7 +113,7 @@ module "beeGFS_client_cluster"  {
   } 
   root_block_device = [
     {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_client_root_block_type}"
       volume_size = 20
       delete_on_termination = true
     }
