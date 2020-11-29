@@ -73,6 +73,7 @@ module "beeGFS_metadata_cluster" {
   subnet_id = "${aws_subnet.beeGFS-public-subnet.id}"
 }
 
+
 # beeGFS_storage_cluster
 module "beeGFS_storage_cluster" {
   source                 = "terraform-aws-modules/ec2-instance/aws"
@@ -99,6 +100,22 @@ module "beeGFS_storage_cluster" {
   subnet_id = "${aws_subnet.beeGFS-public-subnet.id}"
 }
 
+# resource "aws_volume_attachment" "this_ec2" {
+#   count = var.instances_number
+
+#   device_name = "/dev/sdh"
+#   volume_id   = aws_ebs_volume.this[count.index].id
+#   instance_id = module.ec2.id[count.index]
+# }
+
+# resource "aws_ebs_volume" "this" {
+#   count = var.instances_number
+#   volume_type = "${var.beeGFS_storage_type}"
+#   volume_size = 30
+#   delete_on_termination = true
+#   availability_zone = module.ec2.availability_zone[count.index]
+#   size              = 1
+# }
 # beeGFS-client server
 module "beeGFS_client_cluster"  {
   source                 = "terraform-aws-modules/ec2-instance/aws"
