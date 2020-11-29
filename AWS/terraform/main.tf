@@ -32,7 +32,7 @@ data "aws_ami" "beeGFS-storage-img"{
 # beeGFS-management server
 resource "aws_instance" "beeGFS-management" {
   ami          = "${data.aws_ami.beeGFS-management-img.id}"
-  instance_type = "${var.beeGFS_managment_instance_type}"
+  instance_type = "${var.beeGFS_management_instance_type}"
   key_name = "${var.keypair}"
   tags = {
     Name = "BeeGFS Management"
@@ -89,6 +89,7 @@ module "beeGFS_storage_cluster" {
   root_block_device = [ 
     {
       volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1500
       volume_size = 200
       delete_on_termination = true
     }

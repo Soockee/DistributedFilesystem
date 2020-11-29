@@ -19,5 +19,5 @@
 - name: Download and Unpack IOR Benchmark
   unarchive:
       src: https://github.com/hpc/ior/releases/download/3.2.1/ior-3.2.1.tar.gz
-      dest: /home/ubuntu/ior
+      dest: /home/ubuntu/
       remote_src: yes

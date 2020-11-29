@@ -39,3 +39,4 @@
 
   roles:
     - beeGFS_client
+    - benchmark
