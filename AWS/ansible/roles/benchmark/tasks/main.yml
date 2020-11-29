@@ -1,0 +1,23 @@
+---
+- name: Update APT Cache
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Remove apt lock file
+  file:
+    state: absent
+    path: "/var/lib/dpkg/lock"
+
+- name: install BeeGFS client Development and MPICH C Compiler Package
+  apt:
+    pkg:
+      - beegfs-client-dev
+      - mpich
+    force_apt_get: yes
+
+- name: Download and Unpack IOR Benchmark
+  unarchive:
+      src: https://github.com/hpc/ior/releases/download/3.2.1/ior-3.2.1.tar.gz
+      dest: /home/ubuntu/ior
+      remote_src: yes
