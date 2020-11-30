@@ -90,7 +90,8 @@ tuneWorkerBufSize            = 4m
 # (See also "connMgmtdPortUDP" and "connMgmtdPortTCP")
 # Default: <none>
 
-# [storeStorageDirectory]
+[storeStorageDirectory]
+{% for arg1 in  device_list.stdout_lines %}  /data/beegfs/beegfs_storage_{{arg1}} {% if not loop.last %}, {% endif %} {% endfor %} 
 # The absoute path to a storage target. A storage target is a directory where
 # the file system can store raw user file contents. Multiple targets can be
 # specified as a comma-separated list.

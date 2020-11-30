@@ -90,10 +90,26 @@ module "beeGFS_storage_cluster" {
   root_block_device = [ 
     {
       volume_type = "${var.beeGFS_storage_root_block_type}"
-      iops = 1500
-      volume_size = 200
+      iops = 1000
+      volume_size = 100
       delete_on_termination = true
     }
+  ]
+  ebs_block_device = [
+     {
+      device_name = "/dev/sdb"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
+      delete_on_termination = true
+    },
+    {
+      device_name = "/dev/sdc"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
+      delete_on_termination = true
+    },
   ]
   associate_public_ip_address = true
   vpc_security_group_ids = ["${aws_security_group.beegfs-storage-sc.id}","${aws_security_group.ssh.id}","${aws_security_group.http.id}"]

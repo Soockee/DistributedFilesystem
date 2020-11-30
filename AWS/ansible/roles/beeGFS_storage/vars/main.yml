@@ -1,1 +1,1 @@
-storeStorageDirectory: /data/beegfs/beegfs_storage
+storeStorageDirectory: /data/beegfs/beegfs_storage, /data/beegfs/beegfs_storage_xvdb, /data/beegfs/beegfs_storage_xcvdc

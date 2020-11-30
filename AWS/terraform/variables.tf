@@ -62,7 +62,7 @@ variable "beeGFS_client_instance_type" {
 }
 variable "beeGFS_client_instance_count" {
   description = "Count of beeGFS Client Instances"
-  default = "1"
+  default = "2"
 }
 variable "beeGFS_client_root_block_type" {
   description = "The type of the root block device "

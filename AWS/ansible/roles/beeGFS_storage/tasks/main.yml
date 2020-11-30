@@ -1,4 +1,33 @@
 ---
+# There should be a way to run this on all attached unformatted EBS
+# Very hackish approach
+- name: get device list
+  shell: 'lsblk -lno NAME -e 7 -d | tail -n +2'
+  register: device_list
+
+- name: create Filesystem on disks
+  filesystem:
+    fstype: xfs
+    dev: "/dev/{{item}}"
+    force: no
+  loop: "{{ device_list.stdout_lines }}"
+
+- name: create mountpoint for disks
+  file:
+    path: "/data/beegfs/beegfs_storage_{{item}}"
+    state: directory
+    mode: '776'
+  loop: "{{ device_list.stdout_lines }}"
+  
+- name: Mount Disks
+  become: true
+  mount:
+    path: "/data/beegfs/beegfs_storage_{{item}}"
+    src: "/dev/{{item}}"
+    fstype: xfs
+    state: mounted
+  loop: "{{ device_list.stdout_lines }}"
+
 - name: install BeeGFS metadata Package
   apt:
     name: beegfs-storage
