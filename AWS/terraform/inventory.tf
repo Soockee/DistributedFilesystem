@@ -35,3 +35,4 @@ resource "local_file" "aws_file" {
   )
   filename = "./ansible-provisioning/aws-hosts"
 }
+

@@ -32,13 +32,13 @@ data "aws_ami" "beeGFS-storage-img"{
 # beeGFS-management server
 resource "aws_instance" "beeGFS-management" {
   ami          = "${data.aws_ami.beeGFS-management-img.id}"
-  instance_type = "${var.beeGFS_managment_instance_type}"
+  instance_type = "${var.beeGFS_management_instance_type}"
   key_name = "${var.keypair}"
   tags = {
     Name = "BeeGFS Management"
   } 
   root_block_device  {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_management_root_block_type}"
       volume_size = 20
       delete_on_termination = true
   }
@@ -63,8 +63,8 @@ module "beeGFS_metadata_cluster" {
   } 
   root_block_device = [ 
     {
-      volume_type = "standard"
-      volume_size = 20
+      volume_type = "${var.beeGFS_metadata_root_block_type}"
+      volume_size = 30
       delete_on_termination = true
     }
   ]
@@ -72,6 +72,7 @@ module "beeGFS_metadata_cluster" {
   vpc_security_group_ids = ["${aws_security_group.beegfs-meta-sc.id}","${aws_security_group.ssh.id}","${aws_security_group.http.id}"]
   subnet_id = "${aws_subnet.beeGFS-public-subnet.id}"
 }
+
 
 # beeGFS_storage_cluster
 module "beeGFS_storage_cluster" {
@@ -88,17 +89,50 @@ module "beeGFS_storage_cluster" {
   } 
   root_block_device = [ 
     {
-      volume_type = "standard"
-      volume_size = 20
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
       delete_on_termination = true
     }
+  ]
+  ebs_block_device = [
+     {
+      device_name = "/dev/sdb"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
+      delete_on_termination = true
+    },
+    {
+      device_name = "/dev/sdc"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
+      delete_on_termination = true
+    },
   ]
   associate_public_ip_address = true
   vpc_security_group_ids = ["${aws_security_group.beegfs-storage-sc.id}","${aws_security_group.ssh.id}","${aws_security_group.http.id}"]
   subnet_id = "${aws_subnet.beeGFS-public-subnet.id}"
 }
 
-# beeGFS-storage server
+# resource "aws_volume_attachment" "this_ec2" {
+#   count = var.instances_number
+
+#   device_name = "/dev/sdh"
+#   volume_id   = aws_ebs_volume.this[count.index].id
+#   instance_id = module.ec2.id[count.index]
+# }
+
+# resource "aws_ebs_volume" "this" {
+#   count = var.instances_number
+#   volume_type = "${var.beeGFS_storage_type}"
+#   volume_size = 30
+#   delete_on_termination = true
+#   availability_zone = module.ec2.availability_zone[count.index]
+#   size              = 1
+# }
+# beeGFS-client server
 module "beeGFS_client_cluster"  {
   source                 = "terraform-aws-modules/ec2-instance/aws"
   version                = "~> 2.0"
@@ -113,7 +147,7 @@ module "beeGFS_client_cluster"  {
   } 
   root_block_device = [
     {
-      volume_type = "standard"
+      volume_type = "${var.beeGFS_client_root_block_type}"
       volume_size = 20
       delete_on_termination = true
     }

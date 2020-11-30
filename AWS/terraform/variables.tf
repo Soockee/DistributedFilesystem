@@ -24,34 +24,48 @@ variable "public_subnet_cidr" {
 variable "ssh_private_key_file_path" {}
 
 
-## beeGFS Managment
-variable "beeGFS_managment_instance_type" {
-  default = "t2.micro"
+## beeGFS management
+variable "beeGFS_management_instance_type" {
+  default = "t2.small"
 }
-
+variable "beeGFS_management_root_block_type" {
+  description = "The type of the root block device "
+  default = "gp2"
+}
 ## beeGFS Metadata
 variable "beeGFS_metadata_instance_type" {
-  default = "t2.micro"
+  default = "t2.medium"
 }
 variable "beeGFS_metadata_instance_count" {
   description = "Count of beeGFS Metadata Instances"
-  default = "5"
+  default = "2"
+}
+variable "beeGFS_metadata_root_block_type" {
+  description = "The type of the root block device "
+  default = "gp2"
 }
 ## beeGFS Storage
 variable "beeGFS_storage_instance_type" {
-  default = "t2.micro"
+  default = "t2.xlarge"
 }
 variable "beeGFS_storage_instance_count" {
   description = "Count of beeGFS Storage Instances"
-  default = "30"
+  default = "2"
 }
-
+variable "beeGFS_storage_root_block_type" {
+  description = "The type of the root block device "
+  default = "io1"
+}
 ## beeGFS Clients
 variable "beeGFS_client_instance_type" {
-  default = "t2.micro"
+  default = "t2.xlarge"
 }
 variable "beeGFS_client_instance_count" {
   description = "Count of beeGFS Client Instances"
-  default = "5"
+  default = "2"
+}
+variable "beeGFS_client_root_block_type" {
+  description = "The type of the root block device "
+  default = "gp2"
 }
 

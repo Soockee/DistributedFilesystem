@@ -6,15 +6,15 @@
     - setuptools
     - pexpect
 
-#   vars_prompt:
-#       - name: "gitlab_username"
-#         prompt: "Enter Gitlab Username"
-#         private: yes
-#         confirm: yes
-#       - name: "gitlab_password"
-#         prompt: "Enter Gitlab Password"
-#         private: yes
-#         confirm: yes
+  # vars_prompt:
+  #     - name: "gitlab_username"
+  #       prompt: "Enter Gitlab Username"
+  #       private: yes
+  #       confirm: yes
+  #     - name: "gitlab_password"
+  #       prompt: "Enter Gitlab Password"
+  #       private: yes
+  #       confirm: yes
 
 - name: configure and deploy the beeGFS management server
   hosts: beeGFS_managment
@@ -30,12 +30,16 @@
 
 - name: configure and deploy the beeGFS storage server
   hosts: beeGFS_storage
+  gather_facts: yes
+
 
   roles:
     - beeGFS_storage
+
 
 - name: configure and deploy the beeGFS client server
   hosts: beeGFS_client
 
   roles:
     - beeGFS_client
+    - benchmark

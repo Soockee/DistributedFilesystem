@@ -1,10 +1,21 @@
 ---
+- name: Update APT Cache
+  apt:
+    update_cache: yes
+    force_apt_get: yes
+
+- name: Remove apt lock file
+  file:
+    state: absent
+    path: "/var/lib/dpkg/lock"
+
 - name: install BeeGFS client Package
   apt:
     pkg:
       - beegfs-client
       - beegfs-helperd
       - beegfs-utils
+    force_apt_get: yes
 
 - name: use template for client configuration file
   template:
