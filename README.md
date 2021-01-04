@@ -96,6 +96,17 @@ for a more verbose provisioning use:
 make AWS-provisioning-verbose
 ```
 
+### Benchmarking
+
+Benchmarkingtool IOR is beeing used. It's source location after provisioning is ~/ior-{version}. To Build IOR:
+* inside the ior-folder: `sudo ./configure`
+* afterwards `sudo make install`
+* move the IOR binary to another location e.g. /mnt/beegfs
+
+running the benchmark could look like this:
+
+`mpirun -n 64 ./ior -wr -t 1m -b 16m -s 16 -g -F -e -o /mnt/beegfs/test.ior`
+
 ### Additional Information
 
 The .pem file needs to have a specific permission. AWS is going to complain if the file doesn't meet the required permission.

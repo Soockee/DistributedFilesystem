@@ -24,6 +24,7 @@ AWS/terraform/ansible-provisioning/aws-hosts
 
 aws/env/
 env/
+venv/
 
 ssh_config
 
