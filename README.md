@@ -1,4 +1,4 @@
-# Pointcloud Tiler + BeeGFS Cloud Deployment
+# BeeGFS Cloud Deployment
 
 ## AWS
 
@@ -105,9 +105,6 @@ make AWS-provisioning-verbose
 
 ### Benchmarking
 
-
-#### point-read-perf
-tool: https://geocode.igd.fraunhofer.de/pointclouds/point-read-perf
 
 ##### First Example: Local Filesystem; 259.504 Points, 796.8 KB
 
