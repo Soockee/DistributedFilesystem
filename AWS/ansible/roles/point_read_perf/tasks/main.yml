@@ -1,0 +1,15 @@
+- name: check point_read_perf-tiler directory 
+  become: yes
+  file: 
+    path: '{{home_dir}}/dev/point_read_perf'
+    state: directory
+  
+- name: clone pointcloud-tiler repository 
+  become: yes
+  expect:
+    command: git clone {{ point_read_perf }} {{home_dir}}/dev/point_read_perf
+    responses:
+          Username: "{{ gitlab_username }}" # Username is a regex
+          Password: "{{ gitlab_password }}" # Password is a regex
+    timeout: null
+  register: clone_result

@@ -50,7 +50,7 @@ variable "beeGFS_storage_instance_type" {
 }
 variable "beeGFS_storage_instance_count" {
   description = "Count of beeGFS Storage Instances"
-  default = "2"
+  default = "4"
 }
 variable "beeGFS_storage_root_block_type" {
   description = "The type of the root block device "
@@ -62,7 +62,7 @@ variable "beeGFS_client_instance_type" {
 }
 variable "beeGFS_client_instance_count" {
   description = "Count of beeGFS Client Instances"
-  default = "2"
+  default = "4"
 }
 variable "beeGFS_client_root_block_type" {
   description = "The type of the root block device "

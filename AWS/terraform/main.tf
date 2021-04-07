@@ -110,6 +110,13 @@ module "beeGFS_storage_cluster" {
       volume_size = 100
       delete_on_termination = true
     },
+    {
+      device_name = "/dev/sdd"
+      volume_type = "${var.beeGFS_storage_root_block_type}"
+      iops = 1000
+      volume_size = 100
+      delete_on_termination = true
+    },
   ]
   associate_public_ip_address = true
   vpc_security_group_ids = ["${aws_security_group.beegfs-storage-sc.id}","${aws_security_group.ssh.id}","${aws_security_group.http.id}"]
